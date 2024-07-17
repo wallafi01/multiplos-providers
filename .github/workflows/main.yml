@@ -1,0 +1,23 @@
+name: CI/CD Fake
+on: 
+    workflow_dispatch:  
+      inputs:
+        ambiente:
+          type: choice
+          default: "aws"
+          required: true
+          description: "Ambiente aonde será feito o deploy"  
+          options:
+            - aws
+            - azure
+            - gcp 
+jobs:
+    CI:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Publicando a Release
+              run: echo "Publicação da Relase final"    
+    CD:
+      uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
+      with:
+        ambiente: ${{ inputs.ambiente }}        

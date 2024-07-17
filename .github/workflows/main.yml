@@ -15,9 +15,17 @@ jobs:
     CI:
         runs-on: ubuntu-latest
         steps:
-            - name: Publicando a Release
-              run: echo "Publicação da Relase final"    
-    CD:
+            - name: Ambiete
+              run: "echo Abiente selecionado : ${{ inputs.ambiente }}"    
+    AWS:
       uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
       with:
         ambiente: ${{ inputs.ambiente }}        
+    AZURE:
+      uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
+      with:
+        ambiente: ${{ inputs.ambiente }}              
+    GCP:
+      uses: wallafi01/multiplos-providers/.github/workflows/3-gcp-cd.yml@main
+      with:
+        ambiente: ${{ inputs.ambiente }}                      

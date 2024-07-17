@@ -1,13 +1,13 @@
 name: "3-Apply-gcp"
 
 on:
-  release:
-    types:
-      - created
-  workflow_dispatch:
-#   push:
-#     branches:
-#       - main  
+  workflow_call:
+    inputs:
+        ambiente:
+            type: string
+            default: "gcp"
+            required: true
+            description: "Ambiente aonde será feito o deploy"
 env:
   GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
 

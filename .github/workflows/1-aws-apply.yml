@@ -10,6 +10,9 @@ on:
 jobs:
   apply-infra:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read    
     steps: 
     - name: Obtendo o código
       uses: actions/checkout@v4.1.5    

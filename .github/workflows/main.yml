@@ -1,4 +1,4 @@
-name: CI/CD Fake
+name: Selecionar o ambiente para iniciar a Pipeline
 on: 
     workflow_dispatch:  
       inputs:

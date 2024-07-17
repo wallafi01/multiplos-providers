@@ -11,6 +11,7 @@ on:
             - aws
             - azure
             - gcp 
+
 jobs:
     CI:
         runs-on: ubuntu-latest
@@ -20,10 +21,7 @@ jobs:
     AWS:
       uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
       with:
-        ambiente: ${{ inputs.ambiente }}
-      secrets:
-        AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}           
+        ambiente: ${{ inputs.ambiente }}         
           
     AZURE:
       uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main

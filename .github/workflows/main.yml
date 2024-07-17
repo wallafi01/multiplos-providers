@@ -19,6 +19,7 @@ jobs:
               run: "echo Abiente selecionado : ${{ inputs.ambiente }}"    
     AWS:
       uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
+      secrets: inherit
       with:
         ambiente: ${{ inputs.ambiente }}        
     AZURE:

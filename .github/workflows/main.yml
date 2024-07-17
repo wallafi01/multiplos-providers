@@ -20,7 +20,10 @@ jobs:
     AWS:
       uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
       with:
-        ambiente: ${{ inputs.ambiente }}  
+        ambiente: ${{ inputs.ambiente }}
+      secrets:
+        AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}           
           
     AZURE:
       uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main

@@ -2,6 +2,8 @@ name: 1-Apply-infra-AWS
 on:
   workflow_call:
       inputs:
+          AWS_ACCESS_KEY_ID: { required: true, type: string }
+          AWS_SECRET_ACCESS_KEY: { required: true, type: string }        
           ambiente:
               type: string
               default: "aws"

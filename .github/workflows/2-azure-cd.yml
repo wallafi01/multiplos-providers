@@ -1,18 +1,18 @@
-name: 2-Apply-Azure
-
+name: infra-azure
 on:
-  workflow_call:
-    inputs:
-        ambiente:
-            type: string
-            default: "azure"
-            required: true
-            description: "Ambiente aonde será feito o deploy"
+    workflow_call:
+        inputs:                 
+            environment:                
+                type: string
+                default: azure
+                required: true
+                description: "Nome do ambiente que será utilizado"             
 
 jobs:
   apply-deploy:
     name: 'Apply iNfra Azure'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-
+    environment: ${{ inputs.environment }}      
     
     steps:
       - name: Checkout

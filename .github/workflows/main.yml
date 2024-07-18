@@ -22,5 +22,5 @@ jobs:
     uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
     with:       
       environment: ${{inputs.environment}}
-    secrets: inherit      
+    secrets: inherit   
 

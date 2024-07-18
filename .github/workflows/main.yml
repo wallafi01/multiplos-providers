@@ -1,33 +1,18 @@
-name: Selecionar o ambiente para iniciar a Pipeline
+name: CI-CD
 on: 
-    workflow_dispatch:  
-      inputs:
-        ambiente:
-          type: choice
-          default: "aws"
-          required: true
-          description: "Ambiente aonde será feito o deploy"  
-          options:
-            - aws
-            - azure
-            - gcp 
-
+  push:
+  workflow_dispatch:
 jobs:
-    CI:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Ambiete
-              run: "echo Abiente selecionado : ${{ inputs.ambiente }}"    
-    AWS:
-      uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
-      with:
-        ambiente: ${{ inputs.ambiente }}         
-          
-    AZURE:
-      uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
-      with:
-        ambiente: ${{ inputs.ambiente }}              
-    GCP:
-      uses: wallafi01/multiplos-providers/.github/workflows/3-gcp-cd.yml@main
-      with:
-        ambiente: ${{ inputs.ambiente }}                      
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Obtendo o código
+      uses: actions/checkout@v4.1.5
+
+  CD-Homolog:
+    needs: [CI]
+    uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
+    with:       
+      environment: aws
+    secrets: inherit      
+

@@ -2,7 +2,7 @@ name: 1.1-Install-infra-AWS
 
 on:
   workflow_run:
-    workflows: ["1-Apply-infra-AWS"]
+    workflows: ["infra-aws"]
     types:
       - completed
 

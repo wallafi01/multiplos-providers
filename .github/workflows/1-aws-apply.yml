@@ -37,6 +37,7 @@ jobs:
          run: echo "INSTANCE_ID=$(terraform output -raw ec2_instance_id)" >> $GITHUB_ENV
          working-directory: ./src/aws 
     Intsall-tf:
+      needs: [Apply-tf]
       runs-on: ubuntu-latest     
       steps:
         - name: Checkout repository
@@ -94,6 +95,7 @@ jobs:
                     sudo apt-get upgrade -y
               sudo apt-get install -y nginx
     deploy-tf:
+      needs: [Intsall-tf]      
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2

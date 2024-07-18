@@ -19,13 +19,15 @@ jobs:
 
   CD-AWS:
     needs: [CI]
+    if: ${{ github.event.inputs.environment == 'aws' }}
     uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
     with:       
-      environment: ${{inputs.environment}}
+      environment: ${{ github.event.inputs.environment }}
     secrets: inherit   
   CD-AZURE:
     needs: [CI]
+    if: ${{ github.event.inputs.environment == 'aws' }}
     uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
     with:       
-      environment: ${{inputs.environment}}
+      environment: ${{ github.event.inputs.environment }}
     secrets: inherit  

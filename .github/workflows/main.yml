@@ -1,5 +1,6 @@
-name: CI-CD
+name: CI-CD-PROVIDER
 on: 
+  push:
   workflow_dispatch:
     inputs:
       environment:
@@ -9,39 +10,22 @@ on:
           - aws
           - azure
           - gcp
-
 jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - name: Obtendo o código
-        uses: actions/checkout@v4.1.5
-
-      - name: Debug Environment Variable
-        run: "echo Environment: ${{ github.event.inputs.environment }}"
+    - name: Obtendo o código
+      uses: actions/checkout@v4.1.5
 
   CD-AWS:
     if: ${{ github.event.inputs.environment == 'aws' }}
-    runs-on: ubuntu-latest
-    needs: [CI]
-    steps:
-      - name: Debug CD-AWS
-        run: echo "Running CD-AWS job"
-      - name: Apply Infra AWS
-        uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
-        with:       
-          environment: ${{ github.event.inputs.environment }}
-        secrets: inherit   
-
+    uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
+    with:       
+      environment: ${{ github.event.inputs.environment }}
+    secrets: inherit   
   CD-AZURE:
     if: ${{ github.event.inputs.environment == 'azure' }}
-    runs-on: ubuntu-latest
-    needs: [CI]
-    steps:
-      - name: Debug CD-AZURE
-        run: echo "Running CD-AZURE job"
-      - name: Apply Infra Azure
-        uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
-        with:       
-          environment: ${{ github.event.inputs.environment }}
-        secrets: inherit 
+    uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
+    with:       
+      environment: ${{ github.event.inputs.environment }}
+    secrets: inherit  

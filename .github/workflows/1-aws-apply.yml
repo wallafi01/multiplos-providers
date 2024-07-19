@@ -11,6 +11,9 @@ jobs:
     Apply-tf:
        runs-on: ubuntu-latest
        environment: ${{ inputs.environment }}
+       permissions:
+        id-token: write
+        contents: read         
        steps: 
        - name: Obtendo o código
          uses: actions/checkout@v4.1.5

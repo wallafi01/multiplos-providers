@@ -1,14 +1,16 @@
-name: infra-aws
+name: Subindo Infra AWS
+
 on:
     workflow_call:
         inputs:                 
             environment:                
                 type: string
+                default: aws                
                 required: true
                 description: "Nome do ambiente que será utilizado"    
   
 jobs:
-    Apply-tf:
+    Infra:
        runs-on: ubuntu-latest
        environment: ${{ inputs.environment }}
        permissions:
@@ -39,8 +41,9 @@ jobs:
          id: get_instance_id
          run: echo "INSTANCE_ID=$(terraform output -raw ec2_instance_id)" >> $GITHUB_ENV
          working-directory: ./src/aws 
-    Intsall-tf:
-      needs: [Apply-tf]
+
+    Instalacoes:
+      needs: [Infra]
       runs-on: ubuntu-latest     
       steps:
         - name: Checkout repository
@@ -98,7 +101,7 @@ jobs:
                     sudo apt-get upgrade -y
               sudo apt-get install -y nginx
     deploy-tf:
-      needs: [Intsall-tf]      
+      needs: [Instalacoes]      
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2

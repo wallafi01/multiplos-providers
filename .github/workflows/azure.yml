@@ -1,6 +1,5 @@
-name: infra-azure
+name: Subindo Infra AZURE
  
-
 on:
     workflow_call:
         inputs:                 

@@ -1,9 +1,9 @@
-name: CI-CD-PROVIDER
+name: Escolha o ambiente
 
 permissions:
   id-token: write
   contents: read
-  
+
 on: 
   push:
   workflow_dispatch:
@@ -24,13 +24,19 @@ jobs:
 
   CD-AWS:   
     if: ${{ github.event.inputs.environment == 'aws' }}
-    uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
+    uses: wallafi01/multiplos-providers/.github/workflows/aws.yml@main
     with:       
       environment: ${{ github.event.inputs.environment }}
     secrets: inherit   
   CD-AZURE:
     if: ${{ github.event.inputs.environment == 'azure' }}
-    uses: wallafi01/multiplos-providers/.github/workflows/2-azure-cd.yml@main
+    uses: wallafi01/multiplos-providers/.github/workflows/azure.yml@main
     with:       
       environment: ${{ github.event.inputs.environment }}
     secrets: inherit  
+  CD-GCP:
+    if: ${{ github.event.inputs.environment == 'azure' }}
+    uses: wallafi01/multiplos-providers/.github/workflows/gcp.yml@main
+    with:       
+      environment: ${{ github.event.inputs.environment }}
+    secrets: inherit      

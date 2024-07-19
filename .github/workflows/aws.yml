@@ -11,7 +11,7 @@ on:
   
 jobs:
     Infra:
-       name: 'Apply iNfra AWS'      
+       name: 'Subindi infra AWS'      
        runs-on: ubuntu-latest
        environment: ${{ inputs.environment }}
        permissions:
@@ -101,7 +101,7 @@ jobs:
           run: echo "The Command id is ${{ steps.ssm.outputs.command-id }}"          
                     sudo apt-get upgrade -y
               sudo apt-get install -y nginx
-    deploy-tf:
+    Deploy-CodeDeploy:
       needs: [Instalacoes]      
       runs-on: ubuntu-latest
       steps:

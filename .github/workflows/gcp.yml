@@ -8,50 +8,48 @@ on:
             default: "gcp"
             required: true
             description: "Ambiente aonde será feito o deploy"
-env:
-  GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
 
 jobs:
-  apply-cd:
-    name: Terraform Deployment 
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}  
-    permissions:
-      id-token: write
-      contents: read  
+    apply-cd:
+      name: Terraform Deployment 
+      runs-on: ubuntu-latest
+      environment: ${{ inputs.environment }}  
+      permissions:
+        id-token: write
+        contents: read  
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.0.0
+        - name: Set up Terraform
+          uses: hashicorp/setup-terraform@v1
+          with:
+            terraform_version: 1.0.0
 
-      - name: Configure Google Cloud CLI
-        uses: google-github-actions/setup-gcloud@v0.2.0
-        with:
-          service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
-          project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
+        - name: Configure Google Cloud CLI
+          uses: google-github-actions/setup-gcloud@v0.2.0
+          with:
+            service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+            project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
 
-      - name: Terraform Init
-        run: |
-          terraform init
-        working-directory: ./src/gcp
+        - name: Terraform Init
+          run: |
+            terraform init
+          working-directory: ./src/gcp
 
-      - name: Terraform Plan
-        run: |
-          terraform plan 
-        working-directory: ./src/gcp          
+        - name: Terraform Plan
+          run: |
+            terraform plan 
+          working-directory: ./src/gcp          
 
-      - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve 
-        working-directory: ./src/gcp  
+        - name: Terraform Apply
+          run: |
+            terraform apply -auto-approve 
+          working-directory: ./src/gcp  
 
-      - name: Install Nginx on VM
-        run: |
-          VM_IP=$(terraform output vm_instance_ip)
-          ssh -o StrictHostKeyChecking=no adminuser@$VM_IP 'sudo yum update -y && sudo yum install -y nginx && sudo systemctl start nginx && sudo systemctl enable nginx'
-        working-directory: ./src/gcp          
+        - name: Install Nginx on VM
+          run: |
+            VM_IP=$(terraform output vm_instance_ip)
+            ssh -o StrictHostKeyChecking=no adminuser@$VM_IP 'sudo yum update -y && sudo yum install -y nginx && sudo systemctl start nginx && sudo systemctl enable nginx'
+          working-directory: ./src/gcp          

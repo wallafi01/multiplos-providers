@@ -1,16 +1,17 @@
 name: Subindo Infra AWS
 
 on:
-    workflow_call:
-        inputs:                 
-            environment:                
-                type: string
-                default: aws                
-                required: true
-                description: "Nome do ambiente que será utilizado"    
+  workflow_call:
+    inputs:                 
+        environment:                
+            type: string
+            default: aws                
+            required: true
+            description: "Nome do ambiente que será utilizado"    
   
 jobs:
     Infra:
+       name: 'Apply iNfra AWS'      
        runs-on: ubuntu-latest
        environment: ${{ inputs.environment }}
        permissions:

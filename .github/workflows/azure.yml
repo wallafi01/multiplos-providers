@@ -1,13 +1,13 @@
 name: Subindo Infra AZURE
  
 on:
-    workflow_call:
-        inputs:                 
-            environment:                
-                type: string
-                default: azure
-                required: true
-                description: "Nome do ambiente que será utilizado"             
+  workflow_call:
+    inputs:                 
+        environment:                
+            type: string
+            default: azure
+            required: true
+            description: "Nome do ambiente que será utilizado"             
 
 jobs:
     apply-deploy:

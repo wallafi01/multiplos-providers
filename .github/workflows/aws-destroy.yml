@@ -1,4 +1,4 @@
-name: 1.3-Destroy-infra-AWS
+name: Destruir Infra AWS
 
 on:
   workflow_dispatch: 

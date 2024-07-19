@@ -1,8 +1,6 @@
 name: infra-azure
-permissions:
-  id-token: write
-  contents: read   
-  
+ 
+
 on:
     workflow_call:
         inputs:                 
@@ -17,7 +15,9 @@ jobs:
     name: 'Apply iNfra Azure'
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}  
- 
+    permissions:
+      id-token: write
+      contents: read   
     
     steps:
       - name: Checkout

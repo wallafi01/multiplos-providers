@@ -35,7 +35,7 @@ jobs:
       environment: ${{ github.event.inputs.environment }}
     secrets: inherit  
   CD-GCP:
-    if: ${{ github.event.inputs.environment == 'azure' }}
+    if: ${{ github.event.inputs.environment == 'gcp' }}
     uses: wallafi01/multiplos-providers/.github/workflows/gcp.yml@main
     with:       
       environment: ${{ github.event.inputs.environment }}

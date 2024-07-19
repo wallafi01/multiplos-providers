@@ -11,7 +11,7 @@ on:
 jobs:
   apply-deploy:
     name: 'Apply iNfra Azure'
-    runs-on: ubuntu-
+    runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}      
     
     steps:

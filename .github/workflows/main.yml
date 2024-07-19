@@ -17,7 +17,7 @@ jobs:
     - name: Obtendo o código
       uses: actions/checkout@v4.1.5
 
-  CD-AWS:
+  CD-AWS:   
     if: ${{ github.event.inputs.environment == 'aws' }}
     uses: wallafi01/multiplos-providers/.github/workflows/1-aws-apply.yml@main
     with:       
